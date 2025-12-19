@@ -1,0 +1,34 @@
+http://localhost:3000
+
+
+#####
+POST  http://localhost:3000/api/register
+Content-Type: application/json 
+
+{
+    "name":"tayser",
+    "email":"o2@30.com",
+    "password":"Shady2001@SdAR"
+}
+
+######
+GET  http://localhost:3000/api/notes?skip=2&take=2
+
+########
+POST  http://localhost:3000/api/login
+Content-Type: application/json 
+
+{
+  "email":"ola@30.com",
+  "password": "Shady2001@SdAR"
+}
+#######
+
+POST http://localhost:3000/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI1LCJ1c2VybmFtZSI6ImhzaGR3d2FtIiwiaWF0IjoxNzYzOTMzMjM4LCJleHAiOjE3NjQwMTk2Mzh9.WMzPIYA1jhinQkKGWFtrQe9qjk1-rtRCTN2EILmUW3M
+
+{
+  "title": "note 1",
+  "body": "this is note 1"
+}
