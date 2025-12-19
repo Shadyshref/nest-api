@@ -35,18 +35,22 @@ export class AuthService {
     return { access_token };
   }
 
-  async login(logindto: LoginDto) {
-    const loginUser = await this.userSirvice.findByEmail(logindto.email);
-    if (!loginUser) {
-      throw new UnauthorizedException('email or password is incorrect');
-    }
-    const match = await bcrypt.compare(logindto.password, loginUser.password);
-    if (!match) {
-      throw new UnauthorizedException('email or password is incorrect');
-    }
-    const payload = { sub: loginUser.id, username: loginUser.name };
-    const access_token = await this.jwtService.signAsync(payload);
-
-    return { access_token };
+async login(logindto: LoginDto): Promise<string> {
+  const loginUser = await this.userSirvice.findByEmail(logindto.email);
+  if (!loginUser) {
+    throw new UnauthorizedException('email or password is incorrect');
   }
+
+  const match = await bcrypt.compare(
+    logindto.password,
+    loginUser.password,
+  );
+  if (!match) {
+    throw new UnauthorizedException('email or password is incorrect');
+  }
+
+  const payload = { sub: loginUser.id, username: loginUser.name };
+  return this.jwtService.signAsync(payload);
+}
+
 }
